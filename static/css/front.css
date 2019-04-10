@@ -1,0 +1,42 @@
+.head_cf {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.head_cf_cf {
+	margin-top: 24px;
+}
+
+.head_cf_nav {
+	border: none;
+	margin-bottom: 0px;
+	padding-right: 200px;
+	padding-left: 200px;
+	height: 100px;
+	border-radius: 0px;
+	background: linear-gradient(to top, rgb(31, 41, 53), rgb(6, 32, 62));
+}
+.head_drop a {
+	background-color: transparent !important;
+}
+.head_logo {
+	width: 55px;
+	margin-top: -23px;
+}
+footer {
+	background-color: #424242;
+	padding: 80px 0;
+	color: #918f8f;
+}
+footer a {
+	color: #918F8F;
+	padding: 0 5px;
+}
+footer a:hover {
+	text-decoration: none;
+	color: ghostwhite;
+}
+.foot_time {
+	color: #E0E0E0;
+} 
+
+

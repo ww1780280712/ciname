@@ -1,0 +1,14 @@
+span{
+    color: red;
+}
+#img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 50px;
+}
+.h{
+    margin-left: 110px;
+    color: red!important;
+}
