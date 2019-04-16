@@ -106,7 +106,7 @@ router.get('/onemovie', (req, res) => {
                     data.word = '已收藏'
                 } else {
                     data.status = 0;
-                    data.word = '收藏'					
+                    data.word = '收藏'
                 }
                 data.col = result;
                 cb(null, m_id)
@@ -162,7 +162,7 @@ router.post('/addmovie', (req, res) => {
                 d.m_actor,
                 d.m_class,
                 d.m_location,
-                d.m_language, 
+                d.m_language,
                 d.m_showtime,
                 d.m_anname,
                 new Date().toLocaleString(),
@@ -341,26 +341,31 @@ router.get('/btnsearch', (req, res) => {
     console.log(d);
     let data0 = [];
     let sql;
-	if(d.m_class=="全部"){
-		if(d.m_language=="全部"){
-			sql = 'SELECT * FROM movies AS m  WHERE m.m_status = 0';
-			console.log("全部")
-		}else{
-			sql = 'SELECT * FROM movies AS m  WHERE  (m.m_status = 0 AND m.m_language = ? )'
-			console.log("部分")
-		}
-		
-	}else{
-	if(d.m_name){
-		sql = 'SELECT * FROM movies AS m  WHERE m.m_status = 0 AND m.m_name LIKE ? ';
-	}else{
-    if (d.m_way == 0) {
-         sql = 'SELECT * FROM movies AS m  WHERE ( m.m_name LIKE ? AND m.m_class=? OR m.m_language=?)';
+    if (d.m_name) {
+        sql = 'SELECT * FROM movies AS m  WHERE  m.m_name LIKE ? ';
     } else {
-         sql = 'SELECT * FROM movies AS m  WHERE (m.m_status = 0 AND m.m_name LIKE ? AND m.m_class=? AND m.m_language=?)';
+        if (d.m_class == "全部") {
+            if (d.m_language == "全部") {
+                sql = 'SELECT * FROM movies AS m  WHERE m.m_status = 0';
+                console.log("全部")
+            } else {
+                sql = 'SELECT * FROM movies AS m  WHERE  (m.m_status = 0 AND m.m_language = ? )'
+                console.log("部分")
+            }
+
+        } else {
+            if (d.m_name) {
+                sql = 'SELECT * FROM movies AS m  WHERE m.m_status = 0 AND m.m_name = ? ';
+            } else {
+                if (d.m_way == 0) {
+                    sql = 'SELECT * FROM movies AS m  WHERE ( m.m_name LIKE ? AND m.m_class=? OR m.m_language=?)';
+                } else {
+
+                    sql = 'SELECT * FROM movies AS m  WHERE (m.m_status = 0 AND m.m_name LIKE ? AND m.m_class=? AND m.m_language=?)';
+                }
+            }
+        }
     }
-	}
-	}
     data0 = ['%' + d.m_name + '%', d.m_class, d.m_language];
     // let wen1,wen2,wen3;
     // wen1=d.m_name?'AND m.m_name LIKE "%' + d.m_name +'%"':' ';
@@ -378,7 +383,7 @@ router.get('/btnsearch', (req, res) => {
         }
         // console.log(results)
         data.movies = results;
-        console.log(data)
+        // console.log(data)
         // res.render('front/searched', data);
         // res.json({ r: 'success' });
         res.send(data);
