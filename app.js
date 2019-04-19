@@ -44,7 +44,7 @@ app.use(session({
 // });
 // 验证码图片
 app.get('/coder', (req, res) => {
-    var captcha = svgCaptcha.create({noise:4,ignoreChars: '0o1i', size:1,background: '#cc9966',height:38, width:90});
+    var captcha = svgCaptcha.create({noise:4,ignoreChars: '0o1i',background: '#cc9966', size:1,height:38, width:90});
 	req.session.coder = captcha.text;
 	
 	res.type('svg'); // 使用ejs等模板时如果报错 res.type('html')

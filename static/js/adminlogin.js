@@ -64,11 +64,7 @@ $(function () {
             return ;
         }
         $('.H').html('');
-        
     });
-
-
-
  // 用户注册
  form.on('submit(signup)', function(data){
     $.ajax({
