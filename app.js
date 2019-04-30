@@ -22,7 +22,7 @@ app.set('view engine', 'html');
 app.set('views', './views');
 //数据库连接
 global.conn = mysql.createConnection({
-    host:'localhost',
+    host:'120.79.34.89',
     user:'root',
     password:'root',
     port:3306,
@@ -46,7 +46,6 @@ app.use(session({
 app.get('/coder', (req, res) => {
     var captcha = svgCaptcha.create({noise:4,ignoreChars: '0o1i',background: '#cc9966', size:1,height:38, width:90});
 	req.session.coder = captcha.text;
-	
 	res.type('svg'); // 使用ejs等模板时如果报错 res.type('html')
 	res.status(200).send(captcha.data);
     
@@ -103,6 +102,6 @@ app.use('/',require('./module/front/home'));
 app.use('/uploads', express.static('uploads'));
 app.use(express.static('static'));
 //端口
-app.listen(81,()=>{
+app.listen(82,()=>{
     console.log('端口：81');
 })

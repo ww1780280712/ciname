@@ -21,6 +21,21 @@ $(function(){
 			// data:data.field,
 			success: function(result) {
 				console.log(result);
+				if(confirm("上传成功，待审核")){
+					window.location.reload()
+				}else{
+                  return
+				}
+				if(result.r="nouser"){
+					if(result.r == 'nouser'){
+						if(confirm("您还没有登陆,是否去登陆?")){
+							window.location.href = '/logsignup/login'
+						}else{
+							return
+						}
+					}
+				}
+				
 			}
 		});
 		return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。

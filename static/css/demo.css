@@ -20,8 +20,8 @@ html, body { padding: 0; margin: 0; height: 100%; font-size: 16px; background-re
     top: 30%;
     left: 40%;
     background: linear-gradient(230deg,rgba(53,57,74,0) 0%,rgb(0,0,0) 100%);
-    width: 25%;
-    height: 40%;
+    width: 500px;
+    height: 368px;
 }
 
 .adminlogin{
@@ -60,7 +60,7 @@ input::-webkit-input-placeholder{
     position: absolute;
     bottom: 72px;
     right: 60px;
-    border: 1px solid black;
+    border: 1px solid grey;
     text-align: center;
     padding: 7px 25px;
     width: 100px;
@@ -75,4 +75,9 @@ a{
 }
 a:hover{
     color: white;
+}
+.goLogin{
+   position: absolute;
+   bottom: 58px;
+   right: 122px;
 }

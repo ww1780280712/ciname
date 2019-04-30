@@ -1,6 +1,7 @@
 $(function(){
 	//收藏
 	$('.div1').on('click', '.btn_coll', function () {
+		console.log(666666)
 		let m_id = $(this).attr('m_id');
 		let c_status = $(this).attr('status');
 		$.ajax({
@@ -10,10 +11,17 @@ $(function(){
 			data: {m_id: m_id,c_status:c_status},
 			success: function (result) {
 				if (result.r == 'success') {
-					// console.log(result)
-					window.location.reload();
+					console.log(result)
+					// window.location.reload();
 					// $('.btn_coll').attr(status='status').val(word);
 					// console.log('收藏成功')
+				}
+				if(result.r == 'nouser'){
+					if(confirm("您还没有登陆,是否去登陆?")){
+						window.location.href = '/logsignup/login'
+					}else{
+						window.location.reload()
+					}
 				}
 			}
 		});
@@ -33,6 +41,13 @@ $(function(){
 					if (result.r == 'success') {
 						window.location.reload();
 						// console.log('评论成功')
+					}
+					if(result.r == 'nouser'){
+						if(confirm("您还没有登陆,是否去登陆?")){
+							window.location.href = '/logsignup/login'
+						}else{
+							window.location.reload()
+						}
 					}
 				}
 			});

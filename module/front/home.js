@@ -148,6 +148,9 @@ router.get('/shore', (req, res) => {
 });
 //用户分享资源上传
 router.post('/addmovie', (req, res) => {
+    if(req.session.username==undefined){
+        res.json({ r: 'nouser' });
+    }else{
     let d = req.body;
     console.log(d);
     let data = {};
@@ -276,48 +279,57 @@ router.post('/addmovie', (req, res) => {
         res.json({ r: 'success' });
         // console.log(result);
     });
-
+}
 });
 
 //收藏
 router.get('/collection', (req, res) => {
-    let data = {};
-    data.username = req.session.username;
-    data.aid = req.session.aid;
-    data.m_id = req.query.m_id;
-    data.status = req.query.c_status;
-    console.log(data);
-    if (data.status == 0) {
-        let sql = 'INSERT INTO collection VALUES (?,?,?,?,?);'
-        let data0 = [null, data.aid, data.m_id, new Date().toLocaleString(), 1];
-        conn.query(sql, data0, (err, result) => {
-            if (err) {
-                console.log(err);
-                res.json({ r: 'db_err' });
-                return;
-            }
-            res.json({ r: 'success' });
-        })
-    } else {
-        let sql = 'DELETE FROM collection WHERE u_id=? AND m_id=?'
-        let data0 = [data.aid, data.m_id];
-        conn.query(sql, data0, (err, result) => {
-            if (err) {
-                console.log(err);
-                res.json({ r: 'db_err' });
-                return;
-            }
-            res.json({ r: 'success' });
-        })
+        if(req.session.username==undefined){
+            res.json({ r: 'nouser' });
+        }else{
+        let data = {};
+        data.username = req.session.username; 
+        data.aid = req.session.aid;
+        data.m_id = req.query.m_id;
+        data.status = req.query.c_status;
+        // console.log(data);
+        console.log(req.session.username)
+        if (data.status == 0) {
+            let sql = 'INSERT INTO collection VALUES (?,?,?,?,?);'
+            let data0 = [null, data.aid, data.m_id, new Date().toLocaleString(), 1];
+            conn.query(sql, data0, (err, result) => {
+                if (err) {
+                    console.log(err);
+                    res.json({ r: 'db_err' });
+                    return;
+                }
+                res.json({ r: 'success' });
+            })
+        } else {
+            let sql = 'DELETE FROM collection WHERE u_id=? AND m_id=?'
+            let data0 = [data.aid, data.m_id];
+            conn.query(sql, data0, (err, result) => {
+                if (err) {
+                    // console.log(err);
+                    res.json({ r: 'db_err' });
+                    return;
+                }
+                res.json({ r: 'success' });
+            })
+        }
     }
-
+   
 })
 
 //提交评论
 router.post('/talk', (req, res) => {
+    if(req.session.username==undefined){
+        res.json({ r: 'nouser' })
+    }else{
     let d = req.body;
     let data = {};
     data.username = req.session.username;
+    
     data.aid = req.session.aid;
     data.t_text = d.t_text;
     data.m_id = d.m_id;
@@ -332,6 +344,7 @@ router.post('/talk', (req, res) => {
         res.json({ r: 'success' });
     });
     // console.log(data)
+}
 });
 
 //查找
